@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindCare Agent – Mental Health Awareness &amp; Support</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>MindCare Agent</h2>
+    <p class="subtitle">IBM Bob • IBM Cloud • IBM Granite</p>
+
+    <button class="nav-btn active" onclick="switchView('chat', this)">Empathetic AI Chat</button>
+    <button class="nav-btn" onclick="switchView('journal', this)">Mood &amp; Distress Journal</button>
+    <button class="nav-btn" onclick="switchView('helpline', this)">24/7 Crisis Helplines</button>
+
+    <div class="helpline-box">
+      <strong>Need Immediate Help?</strong>
+      <p>Connect with local helplines, counselors, or trusted contacts (with consent).</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- VIEW 1: EMPATHETIC AI CHAT -->
+    <section id="chat-view" class="view active">
+      <div class="header">
+        <div>
+          <h1>Empathetic Mental Health AI Chat</h1>
+          <p class="caption">RAG-Grounded Support • Early Distress Detection • Proactive Care</p>
+        </div>
+        <span class="badge">Active Agent: Empathetic Listener</span>
+      </div>
+
+      <div class="quick-prompts">
+        <button type="button" onclick="sendQuickPrompt('Overwhelmed & Stressed')">Overwhelmed &amp; Stressed</button>
+        <button type="button" onclick="sendQuickPrompt('2-Min Grounding')">2-Min Grounding</button>
+        <button type="button" onclick="sendQuickPrompt('Feeling Hopeless / Support')">Feeling Hopeless / Support</button>
+        <button type="button" onclick="sendQuickPrompt('Daily Self-Care Tips')">Daily Self-Care Tips</button>
+      </div>
+
+      <div id="chat-messages" class="chat-box">
+        <div class="msg agent">
+          <div class="msg-meta">MindCare Agent • IBM Granite + RAG</div>
+          Hello! I'm here to listen empathetically, share mindfulness and coping strategies, and help you find support resources. How are you feeling today?
+        </div>
+        <div class="msg user">
+          <div class="msg-meta">You</div>
+          I've been feeling really drained and anxious this week, and sleep hasn't been easy.
+        </div>
+        <div class="msg agent">
+          <div class="msg-meta">MindCare Agent • Early Detection &amp; Coping Support</div>
+          Thank you for sharing that—carrying ongoing anxiety and poor sleep is exhausting. Based on verified coping guidelines, let's start with a gentle 4-4-6 breathing reset and check if you'd like to log this in your Mood Journal or connect with a counselor or helpline if things feel heavy.
+        </div>
+      </div>
+
+      <form id="chat-form" class="chat-input-row" onsubmit="handleChatSubmit(event)">
+        <input id="chat-input" type="text" placeholder="Share what's on your mind..." required />
+        <button type="submit" class="primary-btn">Send</button>
+      </form>
+
+      <p class="disclaimer">
+        Disclaimer: This AI agent provides mental health awareness, coping support, and resource links—it is not a substitute for professional medical or psychiatric advice.
+      </p>
+    </section>
+
+    <!-- VIEW 2: MOOD & DISTRESS JOURNAL -->
+    <section id="journal-view" class="view">
+      <div class="header">
+        <div>
+          <h1>Mood &amp; Distress Journal</h1>
+          <p class="caption">Early Distress Detection (RAG) • Stress Peak Forecasting • Coping Guidance</p>
+        </div>
+        <span class="badge">Early Detection Agent Active</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Log Daily Check-In</h3>
+          <label for="checkin-window">CHECK-IN WINDOW</label>
+          <select id="checkin-window">
+            <option value="Evening Check-In">Evening Check-In</option>
+            <option value="Morning Check-In">Morning Check-In</option>
+            <option value="High-Stress Moment">High-Stress Moment</option>
+          </select>
+
+          <label for="journal-text">DESCRIBE HOW YOU ARE FEELING</label>
+          <textarea id="journal-text">Feeling drained and anxious after deadlines this week. Having trouble winding down at night and worried about tomorrow's workload.</textarea>
+
+          <button type="button" class="primary-btn" onclick="analyzeJournal()">Log &amp; Analyze Entry</button>
+        </div>
+
+        <div class="panel">
+          <h3>Distress &amp; Preventive Analysis</h3>
+          <div class="metric-box">
+            <div class="metric-label">DETECTED SIGNALS &amp; MOOD STATE</div>
+            <div id="signal-val" class="metric-val">Anxiety &amp; Sleep Fatigue (Moderate)</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">PREDICTED STRESS RISK</div>
+            <div id="risk-val" class="metric-val">Moderate — Evening Wind-Down Window</div>
+          </div>
+          <div id="rec-val" class="alert-box">
+            <strong>RAG-Grounded Recommendation:</strong> Try a 5-minute guided breathing routine and set a screen-free wind-down alarm 45 minutes before sleep. If distress escalates, helpline and counselor options are one click away (alerts require your consent).
+          </div>
+          <p class="disclaimer">
+            Disclaimer: This AI agent supports awareness and early care and is not a substitute for professional medical advice.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: 24/7 CRISIS HELPLINES -->
+    <section id="helpline-view" class="view">
+      <div class="header">
+        <div>
+          <h1>24/7 Crisis Helplines &amp; Consent-Based Support</h1>
+          <p class="caption">Immediate Human Support • Transparent Consent Controls</p>
+        </div>
+        <span class="badge">Safety First</span>
+      </div>
+
+      <div class="panel">
+        <h3>Immediate Support Options</h3>
+        <p>If you or someone you know is in distress or experiencing thoughts of self-harm, please reach out to trained human support right away:</p>
+        <ul class="resource-list">
+          <li><strong>Tele-MANAS (India):</strong> Call <code>14416</code> or <code>1800-891-4416</code> (24/7 mental health support)</li>
+          <li><strong>KIRAN Mental Health Helpline (India):</strong> Call <code>1800-599-0019</code></li>
+          <li><strong>International Resources:</strong> Visit <a href="https://findahelpline.com/" target="_blank" rel="noopener noreferrer">findahelpline.com</a> to find free, confidential support in your country.</li>
+        </ul>
+        <div class="alert-box">
+          <strong>Consent-Driven Escalation:</strong> MindCare Agent never notifies trusted contacts or counselors automatically without your explicit permission.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
